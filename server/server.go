@@ -5,7 +5,9 @@ import (
   "encoding/json"
   "net/http"
   "github.com/siliconvortex/golang-restexample/produce"
+  "github.com/siliconvortex/golang-restexample/common"
   "strconv"
+  "flag"
 )
 
 func serveRest(w http.ResponseWriter, r *http.Request) {
@@ -18,10 +20,14 @@ func serveRest(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-  var port = 12337
-  fmt.Println("Listening on port", port)
+  
+  portPtr := flag.Int("port", common.DEFAULT_PORT, "the port to listen on")
+  flag.Parse()
+
+  fmt.Println("Listening on port", *portPtr)
+
   http.HandleFunc("/", serveRest)
-  http.ListenAndServe("localhost:" + strconv.Itoa(port), nil)
+  http.ListenAndServe("localhost:" + strconv.Itoa(*portPtr), nil)
 }
 
 func getJsonResponse() ([]byte, error) {

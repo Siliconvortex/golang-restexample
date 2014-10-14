@@ -2,14 +2,23 @@ package main
 
 import (
   "github.com/siliconvortex/golang-restexample/produce"
+  "github.com/siliconvortex/golang-restexample/common"
   "encoding/json"
   "fmt"
   "net/http"
   "io/ioutil"
+  "flag"
+  "strconv"
 )
 
 func main() {
-  url := "http://localhost:12337"
+  portPtr := flag.Int("port", common.DEFAULT_PORT, "the port to listen on")
+  flag.Parse()
+
+  url := "http://localhost:" + strconv.Itoa(*portPtr)
+
+  fmt.Println("Getting data from '" + url + "'")
+
   res, err := http.Get(url)
   if err != nil {
     panic(err)
