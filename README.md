@@ -9,4 +9,3 @@ FULL DISCLAIMER: I'm not a card carrying gopher just yet.
 # TODO
 
 - testing
-- command line arguments with default (for port # details)
